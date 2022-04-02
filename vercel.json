@@ -1,0 +1,7 @@
+{
+    "env": {
+        "COSMOS_ENDPOINT": "@cosmos-endpoint",
+        "COSMOS_KEY": "@cosmos-key",
+        "JWT_SECRET": "@jwt-secret"
+    }
+}
