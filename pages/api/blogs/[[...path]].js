@@ -10,6 +10,9 @@ export default async (req, res) => {
     switch (req.method) {
         case 'GET':
             switch (path[0]) {
+                case 'featured':
+                    items = await azureTools.getByField('blogs', 'featured', "true");
+                    break;
                 case 'user':
                     if(path[1]) {
                         items = await azureTools.getByField('blogs', 'user', path[1])
