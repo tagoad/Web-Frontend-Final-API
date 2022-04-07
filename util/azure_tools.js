@@ -29,7 +29,7 @@ export class AzureTools {
     }
 
     async deleteById(container, id) {
-        const { resource } = await this.database.container(container).item(id).delete();
+        const { resource } = await this.database.container(container).item(id, id).delete();
         return resource;
     }
 

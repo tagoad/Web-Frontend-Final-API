@@ -69,6 +69,7 @@ export default async (req, res) => {
             switch (path[0]) {
                 case 'id':
                     if(path[1]) {
+                        console.log(path[1])
                         items = await azureTools.getById('blogs', path[1])
                         if(items.length > 0) {
                             items = await azureTools.deleteById('blogs', path[1])
