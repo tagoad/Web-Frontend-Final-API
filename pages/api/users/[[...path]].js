@@ -83,7 +83,9 @@ export default async (req, res) => {
                         }
                     }, process.env.JWT_SECRET)
                     res.status(200).json({
-                        token: token
+                        token: token,
+                        user: user.id,
+                        dname: user.dName
                     })
                     break
                 default:

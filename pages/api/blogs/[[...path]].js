@@ -1,5 +1,5 @@
 import { AzureTools } from "../../../util/azure_tools";
-import uuid from "uuid";
+import { v4 } from "uuid";
 
 export default async (req, res) => {
     const azureTools = new AzureTools('WDD330-Final')
@@ -25,6 +25,7 @@ export default async (req, res) => {
                     break
                 case 'id':
                     if(path[1]) {
+                        console.log(path[1])
                         items = await azureTools.getById('blogs', path[1])
                     } else {
                         res.status(400).json({
@@ -49,16 +50,17 @@ export default async (req, res) => {
                 })
                 return
             }
-            if(!req.body.user) {
+            const parsedBody = JSON.parse(req.body)
+            if(!parsedBody.user) {
                 res.status(400).json({
                     error: 'Blog post is missing a user'
                 })
                 return
             }
-            if(!req.body.id) {
-                req.body.id = uuid.v4()
+            if(!parsedBody.id) {
+                parsedBody.id = v4()
             }
-            items = await azureTools.create('blogs', req.body)
+            items = await azureTools.create('blogs', parsedBody)
             res.status(201).json({
                 itemCreated: items
             })
@@ -107,6 +109,10 @@ export default async (req, res) => {
                     break
             }
             break
+        case 'OPTIONS':
+            res.status(200).json({
+                message: 'Options request received'
+            })
         default:
             res.status(400).json({
                 error: 'This path requires a valid method'
